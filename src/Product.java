@@ -1,8 +1,10 @@
 public class Product {
     String name;
+    double price;
     double discount;
 
-    Product(String name) {
+    Product(double price, String name) {
+        this.price = price;
         this.name = name;
     }
 
@@ -16,5 +18,9 @@ public class Product {
 
     public String getName() {
         return name;
+    }
+
+    public double getPrice() {
+        return price;
     }
 }

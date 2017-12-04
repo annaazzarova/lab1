@@ -8,14 +8,14 @@ public class Order {
 
     public void getProductsDiscount(){
         for (Product item: products) {
-            System.out.println(item.getName() + " " + item.getDiscount());
+            System.out.println(item.getName() + " " + item.getDiscount() + " " + item.getPrice());
         }
     }
 
-    Order(String[] products) {
+    Order(Catalog catalog, String[] products) {
         ArrayList<Product> productsResult = new ArrayList<>();
         for (String s: products) {
-            productsResult.add(new Product(s));
+            productsResult.add(new Product(catalog.getPrice(s), s));
         }
         this.size = productsResult.size();
         this.products = productsResult;
