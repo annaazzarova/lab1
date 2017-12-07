@@ -3,12 +3,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Order {
-    ArrayList<Product> products = new ArrayList<>();
-    int size;
+    public ArrayList<Product> products = new ArrayList<>();
+    private int size;
+    private float price;
+    private float totalPrice;
 
-    public void getProductsDiscount(){
+    public void getProducts(){
         for (Product item: products) {
-            System.out.println(item.getName() + " " + item.getDiscount() + " " + item.getPrice());
+            System.out.println("Product: " + item.getName() + "\t Price: " + item.getPrice() + "\t Discount:" + item.getDiscount()*100 + "%\t TotalPrice:" + item.getPriceWithDiscount());
         }
     }
 
@@ -19,14 +21,43 @@ public class Order {
         }
         this.size = productsResult.size();
         this.products = productsResult;
+        this.price = getOrderPrice();
+        this.totalPrice = getTotalPrice();
     }
 
-    ArrayList<Product> getTotalDiscount() {
+    public float getTotalOrderPrice() {
+        return totalPrice;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    private float getOrderPrice() {
+        float result = 0;
+        for (Product item: products) {
+            result += item.getPrice();
+        }
+        return result;
+    }
+
+    private float getTotalPrice() {
+        getTotalDiscount();
+        float result = 0;
+        for (Product item: products) {
+            result += item.getPriceWithDiscount();
+        }
+        return result;
+    }
+
+    private ArrayList<Product> getTotalDiscount() {
         ArrayList<Product> result = new ArrayList<>();
         discountForCoupleProducts("A", "B", 0.1);
         discountForCoupleProducts("D", "E", 0.05);
-        checkRule3();
-        checkRule4();
+        checkRule3(0.05);
+        for (String s: new String[]{"K", "L", "N"}) {
+            discountForCoupleProducts("A", s, 0.05);
+        }
         if (this.size == 3){
             discountForAllOrder(0.05);
         }
@@ -39,7 +70,7 @@ public class Order {
         return  result;
     }
 
-    void discountForCoupleProducts(String first, String second, double discountValue) {
+    private void discountForCoupleProducts(String first, String second, double discountValue) {
         int i = 0;
         for (Product item: this.products) {
             for (int j = i + 1; j < this.products.size(); ++j) {
@@ -55,7 +86,7 @@ public class Order {
     }
 
 
-    void checkRule3() {
+    private void checkRule3(double discountValue) {
 
         ArrayList<String> efg = new ArrayList<String>();
         efg.add("E");
@@ -86,18 +117,15 @@ public class Order {
 
         for (int j = 0; j < numberTriple; ++j){
             for (ArrayList<Integer> val: triple.values()) {
-                products.get((val.get(j))).discount = 0.05;
+                products.get((val.get(j))).discount = discountValue;
             }
         }
 
     }
 
-    void checkRule4() {
-
-    }
 
 
-    void discountForAllOrder(double discountValue) {
+    private void discountForAllOrder(double discountValue) {
         for (Product item: products) {
             if(item.name != "A" && item.name != "C") {
                 if (item.discount == 0) {

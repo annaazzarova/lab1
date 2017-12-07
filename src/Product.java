@@ -1,7 +1,7 @@
 public class Product {
     String name;
     double price;
-    double discount;
+    double discount = 0;
 
     Product(double price, String name) {
         this.price = price;
@@ -20,7 +20,7 @@ public class Product {
         return name;
     }
 
-    public double getPrice() {
-        return price;
-    }
+    public double getPrice() { return price; }
+
+    public double getPriceWithDiscount() { return this.getPrice()*(1 - this.getDiscount()); }
 }
