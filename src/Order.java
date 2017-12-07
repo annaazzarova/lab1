@@ -8,9 +8,9 @@ public class Order {
     private float price;
     private float totalPrice;
 
-    public void getProducts(){
+    public void getProductsList(){
         for (Product item: products) {
-            System.out.println("Product: " + item.getName() + "\t Price: " + item.getPrice() + "\t Discount:" + item.getDiscount()*100 + "%\t TotalPrice:" + item.getPriceWithDiscount());
+            System.out.println("Product:" + item.getName() + "\t Price:" + item.getPrice() + "\t Discount:" + item.getDiscount()*100 + "%\t TotalPrice:" + item.getPriceWithDiscount());
         }
     }
 
