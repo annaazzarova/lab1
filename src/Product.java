@@ -1,18 +1,19 @@
 public class Product {
     String name;
-    double price;
-    double discount = 0;
+    float price;
+    float discount = 0;
 
-    Product(double price, String name) {
+    Product(float price, String name) {
         this.price = price;
         this.name = name;
     }
 
-    void setDiscount (double discount) {
+    void setDiscount (float discount) {
+
         this.discount = discount;
     }
 
-    public double getDiscount() {
+    public float getDiscount() {
         return discount;
     }
 
@@ -20,7 +21,7 @@ public class Product {
         return name;
     }
 
-    public double getPrice() { return price; }
+    public float getPrice() { return price; }
 
-    public double getPriceWithDiscount() { return this.getPrice()*(1 - this.getDiscount()); }
+    public float getPriceWithDiscount() { return this.getPrice()*(1 - this.getDiscount()); }
 }
