@@ -1,27 +1,15 @@
-public class Product {
+public class Product implements ProductInterface{
     String name;
-    float price;
-    float discount = 0;
+    double price;
 
-    Product(float price, String name) {
+    Product(double price, String name) {
         this.price = price;
         this.name = name;
-    }
-
-    void setDiscount (float discount) {
-
-        this.discount = discount;
-    }
-
-    public float getDiscount() {
-        return discount;
     }
 
     public String getName() {
         return name;
     }
 
-    public float getPrice() { return price; }
-
-    public float getPriceWithDiscount() { return this.getPrice()*(1 - this.getDiscount()); }
+    public double getPrice() { return price; }
 }
