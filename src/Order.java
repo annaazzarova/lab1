@@ -1,13 +1,18 @@
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Order {
-    ArrayList<OrderItem> products;
+    public Map<Product, Boolean> products = new HashMap<Product, Boolean>();
 
-    Order() {
-        products = new ArrayList<>();
+    public void addProduct(Product product) {
+        this.products.put(product, Boolean.FALSE);
     }
 
-    public void addItem(OrderItem item) {
-        this.products.add(item);
+    public Map<Product, Boolean> getProducts() {
+        return this.products;
+    }
+
+    public int getCount() {
+        return this.products.size();
     }
 }
